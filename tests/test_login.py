@@ -1,18 +1,17 @@
+import time
+
 from playwright.sync_api import expect
-
-from pages.login_page import Loginpage
 from pages.inventory_page import inventorypage
+from pages.order_place import Orderplace
 
-def test_loginverification(page):
-     loginpage=Loginpage(page)
-     invpage=inventorypage(page)
 
-     #Navigate into page
-     loginpage.navigate()
-
-     #enter username and password
-     loginpage.login()
-
-     #verify successful login
+def test_loginverification(logged_in_page):
+     #loginpage=Loginpage(page)
+     invpage=inventorypage(logged_in_page)
      expect(invpage.inventory_container).to_be_visible()
+     #time.sleep(5000)
+
+def test_orderplacement(logged_in_page):
+     order_page=Orderplace(logged_in_page)
+     order_page.orderplacements()
 
